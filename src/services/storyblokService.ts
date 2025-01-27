@@ -6,18 +6,16 @@ import { getStoryblokApi } from "@/lib/storyblok";
 class StoryblokService {
   public async fetchStory(slug: string): Promise<ISbStoryData> {
     const { isEnabled: draftModeEnabled } = await draftMode();
-    const useDraftContent =
-      process.env.NODE_ENV === "development" || draftModeEnabled;
 
     const params: ISbStoriesParams = {
-      version: useDraftContent ? "draft" : "published",
+      version: draftModeEnabled ? "draft" : "published",
     };
 
     const response = await getStoryblokApi()?.getStory(slug, params, {
-      cache: useDraftContent ? "no-store" : "default",
+      cache: draftModeEnabled ? "no-store" : "default",
     });
     console.log(
-      "Storyblok story response",
+      "Storyblok GET story response",
       response?.data?.story?.content?.body
     );
     return response?.data?.story;

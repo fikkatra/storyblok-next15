@@ -2,35 +2,32 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+1. Run `npm i`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Add .env.local file with variable STORYBLOK_PREVIEW_ACCESS_TOKEN.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Run the development server: `npm run dev`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. You should now be able to access http://localhost:3000/home in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. If you also want to preview your local environment in the Storyblok Visual Editor, you need to configure localhost to use https.
+   1. Install the proxy: `sudo npm install -g local-ssl-proxy`
+   2. Run the proxy: `npm run https`
+   3. Test the proxy by browsing to https://localhost:3001/home
 
-## Learn More
+## Storyblok space configuration
 
-To learn more about Next.js, take a look at the following resources:
+This repository assumes a Storyblok space with the following settings and content:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Visual Editor location: https://localhost:3001/api/draft?slug=
+- Blocks: Page and Feature (other blocks are not implemented)
+- Content: a Home page (slug=home) of content type 'Page', with a 'Feature' block.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Running a production build locally
 
-## Deploy on Vercel
+In order to run the production build locally, execute the following commands:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run build`
+- `npm start`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This will create a production build, including optimizations. The [[...slug]] route will be static. Only the first request will render the page (with SSR). Subsequent requests will use the cached static file.

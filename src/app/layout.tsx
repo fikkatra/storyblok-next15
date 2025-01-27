@@ -1,5 +1,5 @@
 import "@/app/globals.css";
-import StoryblokProvider from "@/app/providers/StoryblokProvider";
+import StoryblokProvider from "@/components/StoryblokProvider";
 
 export default function RootLayout({
   children,
