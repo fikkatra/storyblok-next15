@@ -16,6 +16,10 @@ class StoryblokService {
     const response = await getStoryblokApi()?.getStory(slug, params, {
       cache: useDraftContent ? "no-store" : "default",
     });
+    console.log(
+      "Storyblok story response",
+      response?.data?.story?.content?.body
+    );
     return response?.data?.story;
   }
 }

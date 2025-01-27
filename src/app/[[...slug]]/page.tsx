@@ -19,6 +19,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+  console.log("Rerender page for slug", slug);
   const story = await storyblokService.fetchStory(slug?.join("/") || "/");
   if (!story) {
     return <h1>Story not found</h1>;
